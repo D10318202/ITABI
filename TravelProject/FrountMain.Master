@@ -1,0 +1,204 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FrountMain.master.cs" Inherits="TravelProject.FrountMain" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        .pnl {
+            position: fixed;
+            right: 10px;
+            top: 30px;
+        }
+
+        #notifyDate {
+            font-size: 10px;
+        }
+
+        #noticeBlock {
+            background-color: #99999933;
+        }
+    </style>
+
+
+
+    <link href="CSS/bootstrap.min.css" rel="stylesheet" />
+    <script src="JS/jquery.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+    <link href="CSS/MainStyle.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="backgroundcolor-itabiY">
+    <form id="form1" runat="server">
+
+        <nav class="navbar navbar-dark navbar-expand-lg backgroundcolor-itabiB">
+            <div class="container-fluid">
+                <div class="col-lg-1 col-md-0 col-sm-0"></div>
+                <div class="col-md-0">
+                <a class="navbar-brand" href="index.aspx"><img style="width:4vw" src="icon.png"/>
+                </a>
+                </div>
+
+
+                <%--後臺管理頁面連結--%>
+                <div class="nav-item dropdown">
+                    <literal class="nav-link dropdown-toggle" href="#" id="ltlBackAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server" visible="true">你好，管理人。</literal>
+                    <ul class="dropdown-menu backgroundcolor-itabiC" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="BackAdmin/AccountList_backadmin.aspx" id="accountListLink" runat="server">帳號管理</a></li>
+                        <li><a class="dropdown-item" href="BackAdmin/ArticleList_backadmin.aspx" id="articleListLink" runat="server">文章管理</a></li>
+                        <li><a class="dropdown-item" href="BackAdmin/ReportedList_backadmin.aspx" id="a1" runat="server">檢舉管理</a></li>
+                        <li><a class="dropdown-item" href="BackAdmin/DeactivateList_backadmin.aspx" id="a2" runat="server">停用帳號管理</a></li>
+                    </ul>
+                </div>
+
+
+                <%--RWD按鈕--%>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <%--RWD按鈕（網頁版）--%>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+                    <div class="col-lg-3 col-md-1"></div>
+
+                    <%--搜尋方塊--%>
+                    <div class="d-inline-flex ">
+                        <asp:TextBox class="form-control me-2" ID="txtkeyword" runat="server" placeHolder="請輸入搜尋文字" Width="100%"></asp:TextBox>
+                        <asp:Button class="btn btn-outline-light" ID="btnSearch" runat="server" Text="搜尋" OnClick="btnSearch_Click" />
+                    </div>
+
+                 
+
+                    <div class="navbar-nav me-auto ">
+                        <div class="nav-item">
+                            <a class="nav-link " href="Rank.aspx">熱門項目</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="PostArticle.aspx">發布文章</a>
+                        </div>
+
+                        <div class="nav-item">
+                            <a class="nav-link " href="index.aspx">回首頁</a>
+                        </div>
+
+                        <%--通知選單--%>
+                        <asp:HiddenField ID="hfNoticeCount" runat="server" Value="0" />
+                        <div class="nav-item dropdown">
+
+                            <literal class="nav-link dropdown-toggle" href="#" id="navbarDropdownMessage" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server" visible="true">
+                                <span class="badge bg-secondary"><%=this.hfNoticeCount.Value %></span>
+                                <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
+                            </literal>
+
+
+
+                            <ul class="dropdown-menu backgroundcolor-itabiC" style="width: 300px" aria-labelledby="navbarDropdown">
+                                <asp:Repeater ID="rptNotify" runat="server">
+                                    <ItemTemplate>
+                                        <li><a class="dropdown-item" href="<%#Eval("Url") %>">
+                                            <div class="cover col-2">
+                                            <asp:Image ID="imgFollowingList" CssClass="profileImg" runat="server" ImageUrl='<%#Eval("ProfileImg") %>' />
+                                            </div>
+                                            <%#Eval("ActAccount") %>  <%#Eval("NotifyContent") %><br />
+                                            <span id="notifyDate"><%#Eval("CreateTime") %></span>
+                                        </a></li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+                                <asp:Literal ID="ltlNoNotify" runat="server"></asp:Literal>
+                            </ul>
+                        </div>
+
+                        <%--下拉式選單，visiable設為false，登入後改為true--%>
+                        <div class="nav-item dropdown">
+                            <literal class="nav-link dropdown-toggle" href="#" id="navbarDropdownIsLogin" role="button" data-bs-toggle="dropdown" aria-expanded="false" runat="server" visible="true">
+                                <asp:Literal ID="MainAccountltl" runat="server" Text="" />
+                            </literal>
+                            <ul class="dropdown-menu backgroundcolor-itabiC" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="" id="userPage" runat="server"><i class="fa fa-id-card-o" aria-hidden="true"></i>個人檔案</a></li>
+
+
+
+
+                                <li><a class="dropdown-item" href="" id="collectionPage" runat="server"><i class="fa fa-th-list" aria-hidden="true"></i>我的收藏</a></li>
+
+                                <li><a class="dropdown-item" id="liUserInfoEdit" runat="server" href=""><i class="fa fa-cog" aria-hidden="true"></i>設定</a></li>
+
+                                <li><a class="dropdown-item" href="Contact.aspx"><i class="fa fa-envelope" aria-hidden="true"></i>聯絡我們</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <asp:Button class="dropdown-item" ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" /></li>
+                            </ul>
+                        </div>
+
+                        <%--登入按鈕，visiable設為true，登入後改為false--%>
+                        <%--<div class="nav-item">
+                        <a class="nav-link " id="btnLogin" href="login.aspx" runat="server" visible="true">登入</a>
+                    </div>--%>
+                    </div>
+
+
+                   
+
+                </div>
+            </div>
+        </nav>
+
+
+
+        <%--內文--%>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 col-sm-12 mx-auto">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(document).ready(function () {
+            $(".btnDel").click(function () {
+                if (!confirm("您確定要刪除嗎？"))
+                    return false;
+            })
+
+
+            $(".dbItemLogout").click(function () {
+                if (!confirm("您確定要登出嗎？"))
+                    return false;
+            })
+
+            $("#navbarDropdownMessage").click(function () {
+                $.ajax({
+                    url: "/API/ReadNoticeHandler.ashx",
+                    method: "POST",
+                    success: function (txtMsg) {
+                        console.log(txtMsg);
+                        if (txtMsg == "notices viewed") {
+
+                        }
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        alert("通訊失敗，請聯絡管理員。");
+                    }
+                });
+            });
+
+        })
+    </script>
+
+    <script src="../js/Searchkeyword.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FrountMain.master.cs" Inherits="TravelProject.FrountMain" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Button ID="btnLogout" runat="server" Text="登出" OnClick="btnLogout_Click" />
+            <a href="index.aspx">首頁</a>
+            <a href="" id="userPage" runat="server">個人頁面</a>
+            <a href="PostArticle.aspx">發文</a>
+            <a href="" id="collectionPage" runat="server">我的收藏</a>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

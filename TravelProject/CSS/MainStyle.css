@@ -1,0 +1,144 @@
+﻿
+
+
+/*定義主色調*/
+
+
+
+.backgroundcolor-itabiB {
+    background-color: #78C2C4;
+}
+
+.backgroundcolor-itabiY {
+    background-color: #FFFDC9;
+}
+
+.backgroundcolor-itabiC {
+    background-color: #CDF0F1;
+}
+
+
+
+
+/*Cover：首頁用封面圖顯示方形設定*/
+.cover {
+    position: relative;
+    max-width: contain; /* 固定寬度 */
+}
+
+    .cover:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%; /*padding取決於寬度，這裡設定padding-bottom: 100%就可以得到正方形*/
+    }
+
+    .cover img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0; /*將圖片大小固定為父類div的大小*/
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 相當於 background-size: cover; of a background-image */
+        object-position: center;
+    }
+
+
+
+.ownerProfileImg {
+    width: 100px;
+    border-radius: 50%;
+}
+
+img.square {
+    width: 100px;
+    border-radius: 50%;
+}
+
+
+
+
+/*通知、追蹤列表等小圖像頭貼設定*/
+.profileImg {
+    width: 45px;
+    border-radius: 50%;    
+    margin: 5px;
+}
+
+
+
+
+
+
+
+
+/*遮罩*/
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
+    opacity: 0;
+
+}  
+
+.cover a:hover .mask {
+    opacity: 1;
+}
+
+
+
+
+
+
+/*按鈕設定*/
+
+.btn-itabi {
+    color: #FFFFFF;
+    background-color: #78C2C4;
+    border-color: rgba(255, 255, 255, 0.6)
+}
+
+    .btn-itabi:hover {
+        color: #fff;
+        background-color: #66A2A4;
+        border-color: #0a58ca
+    }
+
+    .btn-check:focus + .btn-itabi,
+    .btn-itabi:focus {
+        color: #fff;
+        background-color: #66A2A4;
+        border-color: #0a58ca;
+        box-shadow: 0 0 0 .25rem rgba(49,132,253,.5)
+    }
+
+    .btn-check:active + .btn-itabi,
+    .btn-check:checked + .btn-itabi,
+    .btn-itabi.active,
+    .btn-itabi:active,
+    .show > .btn-itabi.dropdown-toggle {
+        color: #fff;
+        background-color: #0a58ca;
+        border-color: #0a53be
+    }
+
+        .btn-check:active + .btn-primary:focus,
+        .btn-check:checked + .btn-primary:focus,
+        .btn-itabi.active:focus,
+        .btn-itabi:active:focus,
+        .show > .btn-itabi.dropdown-toggle:focus {
+            box-shadow: 0 0 0 .25rem rgba(49,132,253,.5)
+        }
+
+    .btn-itabi.disabled,
+    .btn-itabi:disabled {
+        color: #fff;
+        background-color: #0d6efd;
+        border-color: #0d6efd
+    }

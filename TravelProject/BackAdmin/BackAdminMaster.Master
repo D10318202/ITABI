@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BackAdminMaster.master.cs" Inherits="TravelProject.BackAdmin.BackAdminMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 145px;
+            color: aquamarine;
+        }
+    </style>
+    <link href="../CSS/bootstrap.min.css" rel="stylesheet" />
+    <script src="../JS/jquery.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <link href="../CSS/MainStyle.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+            <nav class="navbar navbar-dark navbar-expand-lg backgroundcolor-itabiY">
+
+        <table align="center">
+            <tr>
+                <td class="auto-style1">
+                    <img src="../icon.png" width="70"/>I TABI
+                </td>
+                <td>
+                    <a href="../index.aspx">首頁</a>
+                    <a href="AccountList_backadmin.aspx">會員管理列表</a>
+                    <a href="ArticleList_backadmin.aspx">文章管理列表</a>
+                    <a href="ReportedList_backadmin.aspx">檢舉管理列表</a>
+                    <a href="DeactivateList_backadmin.aspx">停用帳號管理列表</a>
+                </td>
+                <td>
+                    <asp:Literal ID="ltlUserAcc" runat="server"></asp:Literal>
+                    <asp:Button ID="btnlogout" runat="server" Text="登出" OnClick="btnlogout_Click" />
+                </td>
+            </tr>
+        </table>
+                </nav>
+       <%--內文--%>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-10 col-md-12 col-sm-12 align-items-center">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+
+       
+
+
+       
+
+
+
+
+
+
+    </form>
+</body>
+</html>
