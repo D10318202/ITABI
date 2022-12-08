@@ -1,0 +1,35 @@
+未登入 => 登入頁login => 註冊regester
+註冊regester => 登入頁login => 首頁index
+首頁index
+	=> 發文postarticle =>文章頁面viewarticle
+	=> 個人頁面userpage
+	=> 收藏collection
+		=>查看文章 => 文章頁面viewarticle
+		
+文章頁面viewarticle
+	=> 留言
+	=> 讚
+	=> 收藏
+	=> 編輯postarticle(本人)
+	
+個人頁面userpage
+	=>查看文章 => 文章頁面viewarticle
+	=>追蹤(非本人)
+	=>修改資料(本人)	
+	
+目前完全是用session存取現在登入者
+有些編輯權限是用querystring比對session內的userID
+還會再比對account資料庫中的userID是否一致
+等於比對3次
+不知道這樣安全性會不會有疑慮
+感覺好像還是哪裡怪怪的
+
+
+
+FansID => FollowingID
+
+修改個人資料
+
+野人=>不可以有任何互動=>跳轉回登入頁面
+追蹤者=>顯示名單
+後台=>ERP 檢舉
